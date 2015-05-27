@@ -1,5 +1,42 @@
 
 class UIView
+  attr_accessor :blur_overlay_view
+  def blur_with_effect(effect)
+    ev = UIVisualEffectView.alloc.initWithEffect(effect)
+    ev.frame = self.bounds
+    self.paste ev
+    self.blur_overlay_view = ev
+    ev
+  end
+  def blur_extra_light
+    blur_with_effect UIBlurEffect.effectWithStyle(UIBlurEffectStyleExtraLight)
+  end
+  def blur_light
+    blur_with_effect UIBlurEffect.effectWithStyle(UIBlurEffectStyleLight)
+  end
+  def blur_dark
+    blur_with_effect UIBlurEffect.effectWithStyle(UIBlurEffectStyleDark)
+  end
+  def un_blur
+    if !self.blur_overlay_view.nil?
+      self.blur_overlay_view.lift
+      self.blur_overlay_view = nil
+    end
+  end
+
+  
+  def add_motion(dx=10,dy=10)
+    x = UIInterpolatingMotionEffect.alloc.initWithKeyPath("center.x", type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis)
+        x.minimumRelativeValue = -dx
+        x.maximumRelativeValue = dx
+        
+        y = UIInterpolatingMotionEffect.alloc.initWithKeyPath("center.y", type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis)
+        y.minimumRelativeValue = -dy
+        y.maximumRelativeValue = dy
+        
+        self.addMotionEffect(x)
+        self.addMotionEffect(y)
+  end
   def interact!(m=true)
     self.setUserInteractionEnabled m
   end
@@ -55,10 +92,10 @@ class UIView
   def restore
       zoom scale:1, alpha:1
   end
-  def pulse
+  def pulse(duration=1.0,max=1.5)
     pu = CABasicAnimation.animationWithKeyPath("transform.scale").tap do |q|
-        q.duration = 1.0
-        q.toValue = 1.5
+        q.duration = duration
+        q.toValue = max
         q.timingFunction = CAMediaTimingFunction.functionWithName(KCAMediaTimingFunctionEaseInEaseOut)
         q.autoreverses = true
         q.repeatCount = 40

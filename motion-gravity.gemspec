@@ -14,6 +14,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.version       = MotionGravity::Version
 
-  gem.add_dependency 'bubble-wrap', '1.7.1'
-  gem.add_dependency 'sugarcube', '3.0.5'
+  gem.add_dependency 'bubble-wrap' #, '1.7.1'
+  gem.add_dependency 'sugarcube' #, '3.0.5'
 end

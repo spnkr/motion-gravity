@@ -23,3 +23,9 @@ controller = UIViewController.alloc.init
 controller.paste(foo)        #instead of controller.view.addSubview(foo)
 controller.bcolor = foo      #instead of controller.view.backgroundColor = foo
 ```
+
+
+
+##UIColor
+```ruby
+:orange.color
