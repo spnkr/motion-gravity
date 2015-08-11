@@ -1,5 +1,28 @@
 
 class UIView
+  attr_accessor :pasted_content_height
+  def paste_next(v,marginBottom:marginBottom)
+    self.paste_next(v,marginBottom)
+  end
+  def paste_next(v,marginBottom=0)
+    @pasted_content_height ||= 0
+    v.frame = v.frame.down(@pasted_content_height)
+    pre_pasted_ch = @pasted_content_height
+    @pasted_content_height += v.frame.height
+    self.frame = self.frame.taller(@pasted_content_height - pre_pasted_ch)
+    @pasted_content_height += marginBottom
+    self.frame = self.frame.taller(marginBottom)
+    paste v
+  end
+  def paste_next_hcentered(v)
+    
+  end
+  def paste_next_hvcentered(v)
+    
+  end
+
+
+
   attr_accessor :blur_overlay_view
   def blur_with_effect(effect)
     ev = UIVisualEffectView.alloc.initWithEffect(effect)
@@ -23,6 +46,8 @@ class UIView
       self.blur_overlay_view = nil
     end
   end
+
+  
 
   
   def add_motion(dx=10,dy=10)

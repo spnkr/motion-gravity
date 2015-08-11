@@ -18,4 +18,12 @@ class UIViewController
   def bcolor
     self.view.backgroundColor
   end
+  def add_background_gradient(colors=[])
+    @_background_gradients = [] if @_background_gradients.nil?
+    gradient = CAGradientLayer.layer
+    gradient.frame = self.view.bounds
+    gradient.colors = colors.map{|col| col.uicolor.cgcolor}
+    @_background_gradients.push gradient
+    self.view.layer.insertSublayer(gradient, atIndex:0)
+  end
 end
