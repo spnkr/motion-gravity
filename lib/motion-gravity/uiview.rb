@@ -4,6 +4,9 @@ class UIView
   def paste_next(v,marginBottom:marginBottom)
     self.paste_next(v,marginBottom)
   end
+  def paste_next_space(height=1)
+    self.paste_next(UIView.alloc.initWithFrame([[0,0],[1,1]]),marginBottom:height)
+  end
   def paste_next(v,marginBottom=0)
     @pasted_content_height ||= 0
     v.frame = v.frame.down(@pasted_content_height)
