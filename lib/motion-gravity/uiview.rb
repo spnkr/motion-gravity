@@ -1,5 +1,22 @@
 
 class UIView
+
+  def hCenteredInView(inview,args={})
+    topMargin = args[:topMargin] || 0
+    uiv = self
+    uiv.frame = uiv.frame.centered_in(CGRectMake(0,0,inview.width,uiv.height))
+    uiv.frame = uiv.frame.down(topMargin)
+    uiv
+  end
+  def hvCenteredInView(inview,args={})
+    topMargin = args[:topMargin] || 0
+    uiv = self
+    uiv.frame = uiv.frame.centered_in(CGRectMake(0,0,inview.width,inview.height))
+    uiv.frame = uiv.frame.down(topMargin)
+    uiv
+  end
+
+
   attr_accessor :pasted_content_height
   def paste_next(v,marginBottom:marginBottom)
     self.paste_next(v,marginBottom)
