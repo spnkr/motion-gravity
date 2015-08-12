@@ -15,6 +15,23 @@ class UIView
     uiv.frame = uiv.frame.down(topMargin)
     uiv
   end
+  def topRightInView(inview,topo,righto)
+    uiv = self
+    uiv.frame = [[inview.frame.width - uiv.frame.width - righto,topo],[uiv.frame.width,uiv.frame.height]]
+    mx = UIView.alloc.initWithFrame(uiv.frame).tap do |z|
+      z.setUserInteractionEnabled true
+      uiv.frame = [[0,0],[uiv.frame.width,uiv.frame.height]]
+      z.paste uiv
+    end
+    mx
+  end
+  def topLeftInView(inview,topo,lefto)
+    uiv = self
+    
+    uiv.bcolor = :white.uicolor(0)
+    uiv.frame = [[lefto,topo],[uiv.frame.width,uiv.frame.height]]
+    uiv
+  end
 
 
   attr_accessor :pasted_content_height

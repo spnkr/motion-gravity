@@ -8,14 +8,18 @@ class UIViewController
 
 # contributeViewController.view.frame = $w.view.bounds
 # contributeViewController.view.backgroundColor = UIColor.clearColor
-# contributeViewController.view.insertSubview(beView, atIndex:0)
+# a.insertSubview(vibev, atIndex:0)
 # contributeViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext
 
 # $nc.presentViewController(contributeViewController, animated:true, completion:nil)
 
+# blurEffect = UIBlurEffect.effectWithStyle(UIBlurEffectStyleLight)
+# vibev = UIVisualEffectView.alloc.initWithEffect(UIVibrancyEffect.effectForBlurEffect(blurEffect))
+# vibev.frame = [[0,0],[$w.width,200]]
 
-
-
+# var vibrancyEffect = (forBlurEffect: blurEffect)
+# var vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+# vibrancyEffectView.frame = view.bounds
 
 
 

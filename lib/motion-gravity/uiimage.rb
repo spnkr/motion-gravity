@@ -29,4 +29,20 @@ class UIImage
     uiv.frame = [[lefto,topo],[uiv.frame.width,uiv.frame.height]]
     uiv
   end
+
+  def autoscale(args={})
+    twidth = args[:width] || 0
+    theight = args[:height] || 0
+    if twidth > 0
+      factor = if self.width > twidth
+        twidth.to_f/self.width
+      else
+        self.width/twidth.to_f
+      end
+      self.scale_to(self.size * factor)
+    else
+      App.alert("no height for autoscale yet!")
+      self
+    end
+  end
 end
