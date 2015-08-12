@@ -1,4 +1,57 @@
+
+
 class UIViewController
+#   contributeViewController = UIViewController.alloc.init
+# blurEffect = UIBlurEffect.effectWithStyle(UIBlurEffectStyleLight)
+# beView = UIVisualEffectView.alloc.initWithEffect(blurEffect)
+# beView.frame = $w.view.bounds
+
+# contributeViewController.view.frame = $w.view.bounds
+# contributeViewController.view.backgroundColor = UIColor.clearColor
+# contributeViewController.view.insertSubview(beView, atIndex:0)
+# contributeViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext
+
+# $nc.presentViewController(contributeViewController, animated:true, completion:nil)
+
+
+
+
+
+
+
+# contributeViewController
+
+# $nc.presentViewController(contributeViewController, animated:true, completion:nil)
+
+
+  def addBlurModalSupport(viewcontroller,args={})
+    style = args[:style] || UIBlurEffectStyleLight
+    if style==:light
+      style=UIBlurEffectStyleLight
+    elsif style==:dark
+      style=UIBlurEffectStyleDark
+    end
+
+    contributeViewController = viewcontroller
+    blurEffect = UIBlurEffect.effectWithStyle(style)
+    beView = UIVisualEffectView.alloc.initWithEffect(blurEffect)
+    beView.frame = $nc.view.bounds
+    contributeViewController.view.frame = $nc.view.bounds
+    contributeViewController.view.backgroundColor = UIColor.clearColor
+    contributeViewController.view.insertSubview(beView, atIndex:0)
+    contributeViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext
+  end
+
+  def presentBlurred
+    $nc.presentViewController(self, animated:true, completion:nil)
+  end
+  def dismissBlurred
+    self.dismiss_modal
+    self.dismissViewControllerAnimated(true,completion:lambda{App.alert('dd')})
+  end
+
+
+
   def hide_nav
      self.setNavigationBarHidden(true)
   end

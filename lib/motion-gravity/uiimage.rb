@@ -20,6 +20,7 @@ class UIImage
   end
   def topLeftInView(inview,topo,lefto)
     uiv = self.uiimageview
+    uiv.bcolor = :white.uicolor(0)
     uiv.frame = [[lefto,topo],[uiv.frame.width,uiv.frame.height]]
     uiv
   end
