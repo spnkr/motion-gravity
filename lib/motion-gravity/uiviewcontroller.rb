@@ -1,7 +1,7 @@
 
 
 class UIViewController
-#   contributeViewController = UIViewController.alloc.init
+#   contributeViewController = vcs.mll
 # blurEffect = UIBlurEffect.effectWithStyle(UIBlurEffectStyleLight)
 # beView = UIVisualEffectView.alloc.initWithEffect(blurEffect)
 # beView.frame = $w.view.bounds

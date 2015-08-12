@@ -16,7 +16,12 @@ class UIImage
   def topRightInView(inview,topo,righto)
     uiv = self.uiimageview
     uiv.frame = [[inview.frame.width - uiv.frame.width - righto,topo],[uiv.frame.width,uiv.frame.height]]
-    uiv
+    mx = UIView.alloc.initWithFrame(uiv.frame).tap do |z|
+      z.setUserInteractionEnabled true
+      uiv.frame = [[0,0],[uiv.frame.width,uiv.frame.height]]
+      z.paste uiv
+    end
+    mx
   end
   def topLeftInView(inview,topo,lefto)
     uiv = self.uiimageview
