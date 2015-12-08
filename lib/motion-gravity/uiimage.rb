@@ -37,7 +37,7 @@ class UIImage
       factor = if self.width > twidth
         twidth.to_f/self.width
       else
-        self.width/twidth.to_f
+        twidth.to_f/self.width
       end
       self.scale_to(self.size * factor)
     else

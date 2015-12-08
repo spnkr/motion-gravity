@@ -1,6 +1,22 @@
 
 
 class UIViewController
+  attr_accessor :gradient
+  def paste_next(v,marginBottom=0)
+    self.view.paste_next(v,marginBottom)
+  end
+  def paste_next(v,marginBottom:marginBottom)
+    self.view.paste_next(v,marginBottom)
+  end
+  def paste_next_space(height=1)
+    self.view.paste_next(UIView.alloc.initWithFrame([[0,0],[1,1]]),marginBottom:height)
+  end
+  def use_gradient_background
+    @gradient = CAGradientLayer.layer
+    @gradient.frame = self.view.bounds
+    @gradient.colors = [:red.uicolor.cgcolor,"#0A86CB".uicolor.cgcolor]
+    self.view.layer.insertSublayer(@gradient, atIndex:0)
+  end
 #   contributeViewController = vcs.mll
 # blurEffect = UIBlurEffect.effectWithStyle(UIBlurEffectStyleLight)
 # beView = UIVisualEffectView.alloc.initWithEffect(blurEffect)
@@ -47,9 +63,11 @@ class UIViewController
   end
 
   def presentBlurred
+    raise "no"
     $nc.presentViewController(self, animated:true, completion:nil)
   end
   def dismissBlurred
+    raise "no"
     self.dismiss_modal
     self.dismissViewControllerAnimated(true,completion:lambda{App.alert('dd')})
   end

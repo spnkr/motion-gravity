@@ -1,6 +1,43 @@
-
 class UIView
+  def no_touch
+    self.setUserInteractionEnabled(false)
+  end
+  def yes_touch
+    self.setUserInteractionEnabled(true)
+  end
+  def make_text_for_pasting(text,args={})
+    label = UILabel.alloc.initWithFrame([[(args[:padding] || 20), 0], [self.width-((args[:padding] || 20)*2), 9999]]).tap do |z|
+      z.lineBreakMode = NSLineBreakByWordWrapping
+      z.text = text
+      z.font = args[:font] || UIFont.medium((args[:size] || 18)) 
+      z.color = (args[:color] || :black.uicolor)
+      z.numberOfLines = 0
+      z.textAlignment = (args[:align] || :center).uialignment
+      old_frame = z.frame
+      z.sizeToFit 
+      new_height = z.frame.size.height
+      z.frame = [[args[:padding] || 20,0],[self.width-((args[:padding] || 20)*2),new_height]]
+    end
+    label
+  end
+  def paste_text(text,args={})
+    label = make_text_for_pasting(text,args)
+    paste_next label
+    label
+  end
 
+
+
+
+
+
+
+
+
+
+
+
+  # center this uiview in the passed UIView
   def hCenteredInView(inview,args={})
     topMargin = args[:topMargin] || 0
     uiv = self
@@ -154,18 +191,61 @@ class UIView
   def restore
       zoom scale:1, alpha:1
   end
-  def pulse(duration=1.0,max=1.5)
+  def pulse(args={})
+    duration = args[:duration] || 1.0
+    max_scale = args[:max_scale] || 1.5
+    times = args[:times] || 5
     pu = CABasicAnimation.animationWithKeyPath("transform.scale").tap do |q|
         q.duration = duration
-        q.toValue = max
+        q.toValue = max_scale
         q.timingFunction = CAMediaTimingFunction.functionWithName(KCAMediaTimingFunctionEaseInEaseOut)
         q.autoreverses = true
-        q.repeatCount = 40
+        q.repeatCount = times
     end
 
 
     anl = self.layer.addAnimation(pu,forKey:nil)
-    anl
+    @animation_underlying = anl
+  end
+  def unpulse
+    unless @animation_underlying.nil?
+      @animation_underlying.removeAllAnimations
+    end
+  end
+  def shadow(args={})
+      self.layer.shadowOpacity = 1.0
+      self.layer.shadowRadius = args[:radius] || 5
+      self.layer.shadowOffset = [0,0]
+      self.layer.shadowColor = :black.uicolor.CGColor
+      # self.layer.shouldRasterize = true
   end
 
+end
+
+
+
+
+class UIView
+    attr_accessor :spinner
+    def spin(scolor=:white,sdimens=40)
+        if !self.spinner.nil?
+            self.spinner.stopAnimating
+            self.spinner.lift
+            self.spinner = nil
+        end
+        self.spinner = MMMaterialDesignSpinner.alloc.initWithFrame([[0, 33.5], [sdimens, sdimens]])
+        self.spinner.lineWidth = 1.5
+        self.spinner.tintColor = scolor.uicolor
+        self.spinner.hvCenteredInView(self)
+        self.paste self.spinner
+        self.spinner.startAnimating
+        self.spinner
+    end
+    def un_spin
+        if !self.spinner.nil?
+            self.spinner.stopAnimating
+            self.spinner.lift
+            self.spinner = nil
+        end
+    end
 end
