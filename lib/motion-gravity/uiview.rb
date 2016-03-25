@@ -139,9 +139,9 @@ class UIView
   def interact!(m=true)
     self.setUserInteractionEnabled m
   end
-  def wiggle
-      self.shake(offset: 0.1, repeat: 2, duration: 0.5, keypath: 'transform.rotation')
-  end
+  # def wiggle
+  # #     self.shake(offset: 0.1, repeat: 2, duration: 0.5, keypath: 'transform.rotation')
+  # # end
   def nod
       self.shake(offset: 20, repeat: 10, duration: 5, keypath: 'transform.translation.y')
   end
@@ -227,19 +227,28 @@ end
 
 class UIView
     attr_accessor :spinner
-    def spin(scolor=:white,sdimens=40)
+    def spin(scolor=:white,sdimens=30)
         if !self.spinner.nil?
             self.spinner.stopAnimating
             self.spinner.lift
             self.spinner = nil
         end
         self.spinner = MMMaterialDesignSpinner.alloc.initWithFrame([[0, 33.5], [sdimens, sdimens]])
-        self.spinner.lineWidth = 1.5
+        self.spinner.lineWidth = 4.5
         self.spinner.tintColor = scolor.uicolor
         self.spinner.hvCenteredInView(self)
         self.paste self.spinner
         self.spinner.startAnimating
         self.spinner
+    end
+    def dont_spin
+      un_spin
+    end
+    def unspin
+      un_spin
+    end
+    def spin!
+      un_spin
     end
     def un_spin
         if !self.spinner.nil?

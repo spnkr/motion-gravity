@@ -1,30 +1,11 @@
 
 
-class UIViewController
-  attr_accessor :gradient
-  def paste_next(v,marginBottom=0)
-    self.view.paste_next(v,marginBottom)
-  end
-  def paste_next(v,marginBottom:marginBottom)
-    self.view.paste_next(v,marginBottom)
-  end
-  def paste_next_space(height=1)
-    self.view.paste_next(UIView.alloc.initWithFrame([[0,0],[1,1]]),marginBottom:height)
-  end
-  def use_gradient_background
-    @gradient = CAGradientLayer.layer
-    @gradient.frame = self.view.bounds
-    @gradient.colors = [:red.uicolor.cgcolor,"#0A86CB".uicolor.cgcolor]
-    self.view.layer.insertSublayer(@gradient, atIndex:0)
-  end
-
+class UINavigationController
   def make_nav_bar_transparent
-    self.navigationController.make_nav_bar_transparent
-
-    # navigationBar.setBackgroundImage(UIImage.new,forBarMetrics:UIBarMetricsDefault)
-    #  self.navigationController.navigationBar.shadowImage = UIImage.new
-    #  self.navigationController.navigationBar.translucent = true
-    #  self.navigationController.view.backgroundColor = UIColor.clearColor
+    self.navigationBar.setBackgroundImage(UIImage.new,forBarMetrics:UIBarMetricsDefault)
+    self.navigationBar.shadowImage = UIImage.new
+    self.navigationBar.translucent = true
+    self.view.backgroundColor = UIColor.clearColor
   end
 #   contributeViewController = vcs.mll
 # blurEffect = UIBlurEffect.effectWithStyle(UIBlurEffectStyleLight)

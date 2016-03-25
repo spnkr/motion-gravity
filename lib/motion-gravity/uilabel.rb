@@ -1,5 +1,11 @@
 
 class UILabel
+  def fontSize
+    font.pointSize
+  end
+  def font_size
+    fontSize
+  end
   def headlineForView(inview,args={})
     ns = self.tap do |z|
       z.font = args[:font] || UIFont.title(16) 
