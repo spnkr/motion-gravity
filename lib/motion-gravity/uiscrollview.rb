@@ -27,4 +27,6 @@ class UIScrollView
     self.contentSize = self.contentSize.wider(marginRight)
     paste v
   end
+ 
+
 end

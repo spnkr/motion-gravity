@@ -1,8 +1,20 @@
 motion-gravity
 ==============
 
+Helpers for RubyMotion.
 
-##UIView
+Todo: document more of this
+
+# Examples
+## Animate switching root view controllers
+`App.delegate.changeRootViewController(new_root)`
+
+## UIView
+- add/remove a spinner: view.spin and view.spin!
+- present as a blurred modal (using uieffectviews)
+- add gradients to the background: view.addBackgroundGradient([:red.uicolor,:green.uicolor,:black.uicolor])
+- and more
+
 ``` ruby
 view = UIView.alloc.init
 

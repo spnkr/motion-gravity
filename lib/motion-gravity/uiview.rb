@@ -163,7 +163,11 @@ class UIView
       removeFromSuperview
   end
   def bcolor=(uicolor)
+    if uicolor.is_a? UIColor
       self.backgroundColor = uicolor
+    else
+      self.backgroundColor = uicolor.uicolor
+    end
   end
   def bcolor
       self.backgroundColor
@@ -178,7 +182,8 @@ class UIView
   end
   def round!(rad=5)
       self.layer.cornerRadius = rad
-      self.layer.masksToBounds = false
+      self.layer.masksToBounds = true
+      self.clipsToBounds = true
   end
   def shrink(args={})
       scale=args[:scale] || 0.1
